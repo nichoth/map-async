@@ -2,6 +2,23 @@ var test = require("tap").test
     , sinon = require("sinon")
     , map = require("..")
 
+test("iterator is called with correct index", function(t) {
+    var list = ['a', 'b', 'c']
+        , spy = sinon.spy()
+        , iterator = function (value, i, callback) {
+          spy.apply(this, arguments)
+          callback(null, value+value)
+        }
+        , done = sinon.spy()
+
+    map(list, iterator, done)
+    t.type(spy.getCall(0).args[1], 'number',
+        "index is the wrong type")
+    t.same(spy.getCall(0).args[1], 0,
+        "index is the wrong value")
+    t.end()
+})
+
 test("filter calls each iterator", function (t) {
     var item = createItem()
         , spy = sinon.spy()
