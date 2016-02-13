@@ -1,7 +1,9 @@
 module.exports = map
 
 function map(list, iterator, context, callback) {
-    var keys = Object.keys(list)
+    var keys = Array.isArray(list) ?
+        Array.from(list.keys()) :
+        Object.keys(list)
         , returnValue = Array.isArray(list) ? [] : {}
         , count = keys.length
 

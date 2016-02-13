@@ -2,7 +2,7 @@ var test = require("tap").test
     , sinon = require("sinon")
     , map = require("..")
 
-test("iterator is called with correct index", function(t) {
+test("array iterator is called with numeric index", function(t) {
     var list = ['a', 'b', 'c']
         , spy = sinon.spy()
         , iterator = function (value, i, callback) {
